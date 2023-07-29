@@ -45,7 +45,7 @@ group by continent
 )
 
 select total_cases_by_continent.continent, 
-      total_cases_by_continent.total_cases/(select sum(totalcases) from worldometer_data) * 100 as total_contribution_case_percentage
+      total_cases_by_continent.total_cases/(select sum(totalcases) from worldometer_data) as total_contribution_case_percentage
 from total_cases_by_continent;
 
 -- 6.Development of total cases monthly based on certain country criteria.
