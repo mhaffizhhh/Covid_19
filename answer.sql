@@ -7,32 +7,36 @@ from worldometer_data
 left join country_wise_latest
 on worldometer_data.Country_Region = country_wise_latest.Country_Region;
 
--- 1. Top 10 negara dengan total case terbanyak
+-- 1. Top 10 country with the most total cases.
 select Country_Region, TotalCases
 from worldometer_data
 order by TotalCases desc
 limit 10;
 
--- 2. Total cases,deaths dan recovered dari 10 negara dgn populasi terbanyak
+-- 2. Top 10 country by population with the most total cases, deaths and recovered.
 select Country_Region, Population, TotalCases, TotalDeaths, TotalRecovered
 from worldometer_data
 order by Population desc
 limit 10;
 
--- 3. Total cases, deaths dan recovered by continent
-select continent, sum(TotalCases) as total_cases, sum(TotalDeaths) as total_deaths, sum(TotalRecovered) as total_recovered
+-- 3. Total cases, deaths and recovered by continent.
+select continent, 
+        sum(TotalCases) as total_cases, 
+        sum(TotalDeaths) as total_deaths, 
+        sum(TotalRecovered) as total_recovered
 from worldometer_data
 group by continent
 order by continent;
 
--- 4. Persentase total case berdasarkan country
-select Country_Region, (totalcases/(select sum(totalcases) from worldometer_data))*100 as total_contribution_cases_percentage
+-- 4. Percentage total cases by country.
+select Country_Region, 
+        (totalcases/(select sum(totalcases) from worldometer_data))*100 as total_contribution_cases_percentage
 from worldometer_data
 order by total_contribution_cases_percentage desc;
 
 select sum(totalcases) from worldometer_data;
 
--- 5. Persentase total case berdasarkan continent
+-- 5. Percentage total cases by continent.
 with total_cases_by_continent as
 (
 select continent, sum(totalcases) as total_cases
@@ -40,10 +44,11 @@ from worldometer_data
 group by continent
 )
 
-select total_cases_by_continent.continent, total_cases_by_continent.total_cases/(select sum(totalcases) from worldometer_data) * 100 as total_contribution_case_percentage
+select total_cases_by_continent.continent, 
+      total_cases_by_continent.total_cases/(select sum(totalcases) from worldometer_data) * 100 as total_contribution_case_percentage
 from total_cases_by_continent;
 
--- 6.Perkembangan total cases per month berdasarkan kriteria negara tertentu (data full group)
+-- 6.Development of total cases monthly based on certain country criteria.
 delimiter $$
 create procedure total_cases_monthly_by_country
 (
@@ -62,14 +67,18 @@ drop procedure total_cases_monthly_by_country;
 
 call total_cases_monthly_by_country("russia");
 
--- 7. Jumlah cases, deaths dan recovered perbulan per continent
+-- 7. The highest total cases monthly.
 delimiter $$
 create procedure total_cases_per_continent
 (
 in continent_name text
 )
 begin
-select worldometer_data.continent, month(date) as months, sum(confirmed) as total_confirmed, sum(deaths) as total_deaths, sum(recovered) as total_recovered
+select worldometer_data.continent, 
+        month(date) as months, 
+        sum(confirmed) as total_confirmed, 
+        sum(deaths) as total_deaths, 
+        sum(recovered) as total_recovered
 from worldometer_data
 left join full_grouped
 on worldometer_data.country_region = full_grouped.country_region
@@ -83,8 +92,10 @@ drop procedure total_cases_per_continent;
 
 call total_cases_per_continent("asia");
 
--- 8. Deaths and Recovered/100 cases by continent
-select continent, (sum(TotalDeaths)/sum(TotalCases)*100) as death_percentage, (sum(totalrecovered)/sum(TotalCases)*100) as recovered_percentage
+-- 8. Percentage deaths and recovered cases by continent.
+select continent, 
+      (sum(TotalDeaths)/sum(TotalCases)*100) as death_percentage, 
+      (sum(totalrecovered)/sum(TotalCases)*100) as recovered_percentage
 from worldometer_data
 group by continent
 order by continent;
