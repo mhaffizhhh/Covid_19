@@ -30,7 +30,7 @@ order by continent;
 
 -- 4. Percentage total cases by country.
 select Country_Region, 
-        (totalcases/(select sum(totalcases) from worldometer_data))*100 as total_contribution_cases_percentage
+        (totalcases/(select sum(totalcases) from worldometer_data)) as total_contribution_cases_percentage
 from worldometer_data
 order by total_contribution_cases_percentage desc;
 
