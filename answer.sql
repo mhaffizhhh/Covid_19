@@ -94,8 +94,8 @@ call total_cases_per_continent("asia");
 
 -- 8. Percentage deaths and recovered cases by continent.
 select continent, 
-      (sum(TotalDeaths)/sum(TotalCases)*100) as death_percentage, 
-      (sum(totalrecovered)/sum(TotalCases)*100) as recovered_percentage
+      sum(TotalDeaths)/sum(TotalCases) as death_percentage, 
+      sum(totalrecovered)/sum(TotalCases) as recovered_percentage
 from worldometer_data
 group by continent
 order by continent;
