@@ -13,4 +13,4 @@ Here I do several queries, namely:
 Result can be seen [Query](https://github.com/mhaffizhhh/query5/blob/main/answer.sql) and [Dashboard](https://github.com/mhaffizhhh/query5/blob/main/dashboard_covid-19.pdf).
 
 ## Dataset
-Source: https://www.kaggle.com/datasets/imdevskp/corona-virus-report
+[Data](https://github.com/mhaffizhhh/Covid_19/blob/main/Covid%20Dataset.zip) source: https://www.kaggle.com/datasets/imdevskp/corona-virus-report
