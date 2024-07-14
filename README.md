@@ -1,4 +1,5 @@
 # Desc
+Here I do several queries, namely:
 1. Top 10 country with the most total cases.
 2. Top 10 country by population with the most total cases, deaths and recovered.
 3. Total cases, deaths and recovered by continent.
@@ -8,4 +9,8 @@
 7. The highest total cases monthly.
 8. Percentage deaths and recovered cases by continent.
 
-SOURCE DATASET : https://www.kaggle.com/datasets/imdevskp/corona-virus-report
+## Result
+Result can be seen [Query](https://github.com/mhaffizhhh/query5/blob/main/answer.sql) and [Dashboard](https://github.com/mhaffizhhh/query5/blob/main/dashboard_covid-19.pdf).
+
+## Dataset
+Source: https://www.kaggle.com/datasets/imdevskp/corona-virus-report
